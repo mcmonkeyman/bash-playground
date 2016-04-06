@@ -5,14 +5,16 @@ exec scala $0 $DIR $SCRIPT
 ::!#
 
 import java.io.File
+import java.net.URL
 import scala.sys.process._
 
 object App {
   def main(args: Array[String]): Unit = {
-    getBashArguments(args)
-    simpleFileManipulations()
-    simpleChaining()
-    fileExists("README.md")
+    //getBashArguments(args)
+    //simpleFileManipulations()
+    //simpleChaining()
+    //fileExists("README.md")
+    backupIfNew("https://us2.hostedftp.com/files/")
   }
 
   def getBashArguments(args: Array[String]): Unit = {
@@ -47,6 +49,40 @@ object App {
     val cmd = Seq("find", baseDir, "-name", "*.scala", "-type", "f")
     val lines = cmd lines_! ProcessLogger(buffer append _)
     (lines, buffer)
+  }
+
+  def backupIfNew(fileUrl: String) = {
+
+    val currentFileName = "./current.file"
+    val tempFileName = "./tmp.file"
+    new URL(fileUrl) #> new File(tempFileName) !!
+
+    val currentFile = new File(currentFileName)
+    val tempFile = new File(tempFileName)
+
+    if(isNotTheSame(currentFile, tempFile)) {
+      println("not the same")
+     // Make the new file 
+    } else {
+      println("the same")
+    }
+  }
+
+  def isNotTheSame(fileA: File, fileB: File ) = {
+    !isSame(fileA, fileB)
+  }
+
+  def isSame(fileA: File, fileB: File) = {
+    ckSum(fileA) == ckSum(fileB)
+  }
+
+
+  def ckSum(file: File): Tuple2[String, String] = {
+   val pattern = "(\\d+) (\\d+).*".r
+   val result: String = Seq("ckSum", file.getName()).!!
+   val cleanResult: String = result.trim.stripLineEnd.trim
+   val pattern(a, b) = cleanResult 
+   (a, b)
   }
 
 }
