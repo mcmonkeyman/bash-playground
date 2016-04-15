@@ -2,7 +2,7 @@
 
 if [ $# -ne 1 ]; then
   echo "Missing repo directory."
-  echo "Usage:./set-repo-tags/sh /directory/with/repos"
+  echo "Usage:./set-repo-tags.sh /directory/with/repos"
   exit 1
 fi
 
