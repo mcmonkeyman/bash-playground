@@ -1,8 +1,8 @@
 #!/bin/bash
 # requires jsonpp to be installed
 
-echo ${CHRONOS_USER}:?"Need to set CHRONOS_USER to non-empty value"}
-echo ${CHRONOS_PASS}:?"Need to set CHRONOS_PASS to non-empty value"}
+: ${CHRONOS_USER:?"Need to set CHRONOS_USER to non-empty value"}
+: ${CHRONOS_PASS:?"Need to set CHRONOS_PASS to non-empty value"}
 
 if [ $# -ne 1 ]; then
   echo "Missing env."

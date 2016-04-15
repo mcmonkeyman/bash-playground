@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Check that chrons credentials are set
-echo ${CHRONOS_USER}:?"Need to set CHRONOS_USER to non-empty value"}
-echo ${CHRONOS_PASS}:?"Need to set CHRONOS_PASS to non-empty value"}
+: ${CHRONOS_USER:?"Need to set CHRONOS_USER to non-empty value"}
+: ${CHRONOS_PASS:?"Need to set CHRONOS_PASS to non-empty value"}
 
 # Check that the tags are set
-echo ${ACRIS_TAG:?"Need to set ACRIS_TAG non-empty"}
-echo ${EMAIL_BUGGER_TAG:?"Need to set EMAIL_BUGGER_TAG non-empty"}
-echo ${ENQUEUE_TAG:?"Need to set ENQUEUE_TAG non-empty"}
-echo ${ES_TAG:?"Need to set ES_TAG non-empty"}
-echo ${HPD_TAG:?"Need to set HPD_TAG non-empty"}
-echo ${ST_TAG:?"Need to set ST_TAG non-empty"}
+: ${ACRIS_TAG:?"Need to set ACRIS_TAG non-empty"}
+: ${EMAIL_BUGGER_TAG:?"Need to set EMAIL_BUGGER_TAG non-empty"}
+: ${ENQUEUE_TAG:?"Need to set ENQUEUE_TAG non-empty"}
+: ${ES_TAG:?"Need to set ES_TAG non-empty"}
+: ${HPD_TAG:?"Need to set HPD_TAG non-empty"}
+: ${ST_TAG:?"Need to set ST_TAG non-empty"}
 
 # Check for env
 if [ $# -ne 1 ]; then
