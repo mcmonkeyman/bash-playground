@@ -1,1 +1,3 @@
 source-passwords.sh
+./run-logs/
+**/run-logs/

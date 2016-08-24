@@ -12,14 +12,19 @@ fi
 
 ENV=$1
 
+LOG_DIR=./run-logs/
+TIME_STAMP=$(date +%Y-%m-%d-%T)
+RUN_DIR=$LOG_DIR/$TIME_STAMP
+mkdir -p $RUN_DIR
+
 function timestamp {
   return date +"%T"
 }
 
 CHRONOS_URL="http://chronos.$ENV.reonomy.com"
 
-BACKUP_DIR="./chronos-backups/"
-mkdir -p ${BACKUP_DIR}
-BACKUP_FILE=${BACKUP_DIR}${ENV}_backup_$(date +%Y-%m-%d--%H%M%S).json
+BACKUP_FILE=${RUN_DIR}${ENV}_backup_$(date +%Y-%m-%d--%H%M%S).json
 
 curl -v  -H "Content-Type:application/json"  -u $CHRONOS_USER:$CHRONOS_PASS $CHRONOS_URL/scheduler/jobs | jsonpp > ${BACKUP_FILE} 
+
+echo BACKUP_FILE

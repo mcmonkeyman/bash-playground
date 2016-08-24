@@ -13,6 +13,13 @@ fi
 
 FLAG=$1
 
+LOG_DIR=./run-logs/
+TIME_STAMP=$(date +%Y-%m-%d-%T)
+RUN_DIR=$LOG_DIR/$TIME_STAMP
+mkdir -p $RUN_DIR
+
+SNAPSHOT_BEFORE=$RUN_DIR/snapshot_before.txt
+SNAPSHOT_AFTER=$RUN_DIR/snapshot_after.txt
 
 function function_one {
     echo "Function One"
@@ -55,3 +62,9 @@ do
         *) echo invalid option;;
     esac
 done
+
+echo 'before' > $SNAPSHOT_BEFORE
+echo 'after' > $SNAPSHOT_AFTER
+
+echo 'Diff between snapshost ....... '
+bash -c "diff <(sort $SNAPSHOT_BEFORE)  <(sort $SNAPSHOT_AFTER)"
